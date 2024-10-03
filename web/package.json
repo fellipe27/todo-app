@@ -1,0 +1,28 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@react-oauth/google": "^0.12.1",
+    "axios": "^1.7.7",
+    "date-fns": "^3.6.0",
+    "i": "^0.3.7",
+    "jwt-decode": "^4.0.0",
+    "next": "^14.2.14",
+    "npm": "^10.8.3",
+    "phosphor-react": "^1.4.1",
+    "react": "^18",
+    "react-day-picker": "^9.0.8",
+    "react-dom": "^18",
+    "tailwind-scrollbar": "^3.1.0"
+  },
+  "devDependencies": {
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1"
+  }
+}

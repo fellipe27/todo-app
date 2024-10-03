@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String   @id @default(uuid())
+  name             String
+  email            String   @unique
+  picture          String?
+  isDarkMode       Boolean  @default(false)
+  isStickysColored Boolean  @default(true)
+  lists            List[]
+  stickys          Sticky[]
+  tags             Tag[]
+  events           Event[]
+}
+
+model List {
+  id     String @id @default(uuid())
+  title  String
+  color  String
+  userId String
+  tasks  Task[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Task {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  createdAt   DateTime  @default(now())
+  dueDate     DateTime?
+  listId      String
+  tags        Tag[]
+  subtasks    Subtask[]
+
+  list List @relation(fields: [listId], references: [id], onDelete: Cascade)
+}
+
+model Sticky {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  createdAt   DateTime @default(now())
+  color       String
+  userId      String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Tag {
+  id     String @id @default(uuid())
+  title  String
+  color  String
+  userId String
+  tasks  Task[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Subtask {
+  subtaskId String @id @default(uuid())
+  id        String
+  title     String
+  tasks     Task[]
+}
+
+model Event {
+  id        String   @id @default(uuid())
+  title     String
+  createdAt DateTime @default(now())
+  date      DateTime
+  color     String
+  userId    String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
