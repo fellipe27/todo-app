@@ -36,7 +36,7 @@ export function ListContent({ list, handleGetLists }: ListContentProps) {
         return
     }
 
-    const { setContent } = context
+    const { setContent, setChangesOccured } = context
     const inputListTitleRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
@@ -107,6 +107,7 @@ export function ListContent({ list, handleGetLists }: ListContentProps) {
             await api.delete(`/lists/${list.id}`).then(() => {
                 handleGetLists()
                 setContent({} as Content)
+                setChangesOccured(true)
             })
         } catch (error) {
             console.log(error)
